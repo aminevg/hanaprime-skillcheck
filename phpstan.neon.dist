@@ -1,0 +1,8 @@
+parameters:
+
+    paths:
+        - app/
+        - routes/
+
+    # Level 10 is the highest level
+    level: 10
