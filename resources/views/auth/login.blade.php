@@ -1,4 +1,4 @@
-<x-layouts.guest :title="$title">
+<x-layouts.guest title="ログイン">
     <form>
         <div class="flex flex-col gap-6">
             <div class="grid gap-2">
@@ -24,7 +24,7 @@
 
             <x-form.primary-button type="submit" class="w-full">
                 ログイン
-            </x-primary-button>
+            </x-form.primary-button>
         </div>
     </form>
 </x-layouts.guest>
