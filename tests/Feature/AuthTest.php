@@ -15,5 +15,15 @@ test('can see login page as guest', function () {
 test('cannot see login page if logged in', function () {
     $user = User::factory()->createOne();
     actingAs($user)->get(route('login'))
-      ->assertRedirectToRoute('home');
+        ->assertRedirectToRoute('home');
+});
+
+test('cannot see home page as guest', function () {
+    get(route('home'))->assertRedirectToRoute('login');
+});
+
+test('can see home page if logged in', function () {
+    $user = User::factory()->createOne();
+    actingAs($user)->get(route('home'))
+        ->assertOk();
 });
