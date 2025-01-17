@@ -15,6 +15,7 @@ jobs:
           MYSQL_DATABASE: 'laravel'
           MYSQL_USER: 'laravel_user'
           MYSQL_PASSWORD: 'password'
+          MYSQL_ALLOW_EMPTY_PASSWORD: 1
         ports:
             - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -59,6 +60,7 @@ jobs:
           MYSQL_DATABASE: 'laravel'
           MYSQL_USER: 'laravel_user'
           MYSQL_PASSWORD: 'password'
+          MYSQL_ALLOW_EMPTY_PASSWORD: 1
         ports:
             - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
