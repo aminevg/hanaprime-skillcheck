@@ -1,5 +1,6 @@
 <x-layouts.guest title="ログイン">
-    <form>
+    <form action="{{ route('login.store') }}" method="POST">
+        @csrf
         <div class="flex flex-col gap-6">
             <div class="grid gap-2">
                 <x-form.input-label for="email">メールアドレス</x-form.input-label>
