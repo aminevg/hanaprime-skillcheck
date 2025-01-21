@@ -23,9 +23,9 @@
                     for="remember_me">次回以降はパスワードを省略する</x-form.input-label>
             </div>
 
-            <x-form.primary-button type="submit" class="w-full">
+            <x-ui.primary-button type="submit" class="w-full">
                 ログイン
-            </x-form.primary-button>
+            </x-ui.primary-button>
         </div>
     </form>
 </x-layouts.guest>

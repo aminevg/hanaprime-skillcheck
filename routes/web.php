@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\DiaryController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('todos.index');
-    })->name('home');
+    Route::resource('diaries', DiaryController::class)
+        ->except('show');
 
     Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('login.destroy');

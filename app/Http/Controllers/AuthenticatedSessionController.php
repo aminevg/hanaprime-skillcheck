@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
 
         session()->regenerate();
 
-        return redirect()->intended(route('home'));
+        return redirect()->intended(route('diaries.index'));
     }
 
     public function destroy(): RedirectResponse

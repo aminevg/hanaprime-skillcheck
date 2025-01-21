@@ -11,6 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->redirectGuestsTo(fn () => route('login.create'));
+        $middleware->redirectUsersTo(fn () => route('diaries.index'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

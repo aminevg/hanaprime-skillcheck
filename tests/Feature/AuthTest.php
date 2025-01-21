@@ -18,16 +18,16 @@ test('can see login page as guest', function () {
 test('cannot see login page if logged in', function () {
     $user = User::factory()->createOne();
     actingAs($user)->get(route('login.create'))
-        ->assertRedirectToRoute('home');
+        ->assertRedirectToRoute('diaries.index');
 });
 
 test('cannot see home page as guest', function () {
-    get(route('home'))->assertRedirectToRoute('login.create');
+    get(route('diaries.index'))->assertRedirectToRoute('login.create');
 });
 
 test('can see home page if logged in', function () {
     $user = User::factory()->createOne();
-    actingAs($user)->get(route('home'))
+    actingAs($user)->get(route('diaries.index'))
         ->assertOk();
 });
 
@@ -40,7 +40,7 @@ test('can log in', function () {
     post(route('login.store'), [
         'email' => 'test@example.com',
         'password' => 'password',
-    ])->assertRedirectToRoute('home');
+    ])->assertRedirectToRoute('diaries.index');
 
     assertAuthenticatedAs($user);
 });
