@@ -5,7 +5,14 @@
         @forelse ($diaries as $diary)
             <x-ui.card :title="$diary['title']">
                 <div class="flex h-full flex-col">
-                    <img src="{{ $diary['image_path'] }}" class="h-60 w-80" />
+                    @if ($diary['image_path'])
+                        <img src="{{ $diary['image_path'] }}" class="h-60 w-80 rounded-lg" />
+                    @else
+                        <div
+                            class="flex h-60 w-80 items-center justify-center rounded-lg border text-stone-950 opacity-50">
+                            画像は登録されていません。
+                        </div>
+                    @endif
                     <p class="line-clamp-2 h-[2lh] max-w-80 leading-7">
                         {{ $diary['content'] }}</p>
                 </div>
