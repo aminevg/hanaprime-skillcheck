@@ -8,6 +8,13 @@ use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
+test('redirects to diaries page when visiting root', function () {
+    $user = User::factory()->createOne();
+
+    actingAs($user)->get('/')
+        ->assertRedirectToRoute('diaries.index');
+});
+
 test('shows appropriate message when no diaries found', function () {
     $user = User::factory()->createOne();
 

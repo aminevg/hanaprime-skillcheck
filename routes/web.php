@@ -8,6 +8,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('diaries', DiaryController::class)
         ->except('show');
 
+    Route::redirect('/', '/diaries');
+
     Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('login.destroy');
 });
