@@ -30,7 +30,7 @@ class DiaryFactory extends Factory
 
     private function downloadPlaceholderFile(): ?string
     {
-        $response = Http::get('https://picsum.photos/320/240');
+        $response = Http::get('https://fakeimg.pl/320x240');
 
         if (! $response->successful()) {
             return null;
