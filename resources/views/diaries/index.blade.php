@@ -12,7 +12,9 @@
                 <x-slot:footer>
                     <div class="flex w-full justify-between">
                         <x-ui.primary-button element="a"
-                            href="#">編集</x-ui.primary-button>
+                            :href="route('diaries.edit', [
+                                'diary' => $diary['id'],
+                            ])">編集</x-ui.primary-button>
                         <x-ui.destructive-button>削除</x-ui.destructive-button>
                     </div>
                 </x-slot:footer>
@@ -20,7 +22,7 @@
         @empty
             <p class="col-span-full">日記が追加されていません。</p>
         @endforelse
-</div>
+    </div>
 
-<x-ui.pagination :paginator="$diaries" class="py-8" />
+    <x-ui.pagination :paginator="$diaries" class="py-8" />
 </x-layouts.authenticated>

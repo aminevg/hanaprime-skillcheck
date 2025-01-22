@@ -29,6 +29,7 @@ class DiaryController extends Controller
                 ->orderByDesc('created_at')
                 ->paginate(5)
                 ->through(fn (Diary $diary) => [
+                    'id' => $diary->id,
                     'title' => $diary->created_at?->format('Y年m月d日'),
                     'image_path' => $diary->file_name
                         ? Storage::temporaryUrl(
@@ -43,11 +44,13 @@ class DiaryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         if (request()->user()?->cannot('create', Diary::class)) {
             abort(403);
         }
+
+        return view('diaries.create');
     }
 
     /**
@@ -63,11 +66,15 @@ class DiaryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Diary $diary)
+    public function edit(Diary $diary): View
     {
-        if (request()->user()?->cannot('update', Diary::class)) {
+        if (request()->user()?->cannot('update', $diary)) {
             abort(403);
         }
+
+        return view('diaries.edit', [
+            'diary' => $diary,
+        ]);
     }
 
     /**
@@ -75,7 +82,7 @@ class DiaryController extends Controller
      */
     public function update(UpdateDiaryRequest $request, Diary $diary)
     {
-        if (request()->user()?->cannot('update', Diary::class)) {
+        if (request()->user()?->cannot('update', $diary)) {
             abort(403);
         }
     }
@@ -85,7 +92,7 @@ class DiaryController extends Controller
      */
     public function destroy(Diary $diary)
     {
-        if (request()->user()?->cannot('delete', Diary::class)) {
+        if (request()->user()?->cannot('delete', $diary)) {
             abort(403);
         }
     }
