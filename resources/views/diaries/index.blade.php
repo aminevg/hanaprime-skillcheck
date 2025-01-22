@@ -20,10 +20,6 @@
         @empty
             <p class="col-span-full">日記が追加されていません。</p>
         @endforelse
-
-    {{-- @empty($diaries)
-        <p class="col-span-full">日記が追加されていません。</p>
-    @endempty --}}
 </div>
 
 <x-ui.pagination :paginator="$diaries" class="py-8" />
