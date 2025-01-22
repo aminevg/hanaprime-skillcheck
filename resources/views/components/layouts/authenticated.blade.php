@@ -1,6 +1,9 @@
 @props(['title' => ''])
 
 <x-layouts.root :title="$title">
+    <script type="module">
+        hello();
+    </script>
     <header class="sticky top-0 z-50 w-full">
         <nav
             class="flex h-14 w-full items-center border-b bg-white px-6 py-3 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -20,12 +23,22 @@
                 <x-ui.primary-button element="a"
                     href="{{ route('diaries.create') }}"
                     class="max-lg:hidden">日記を追加</x-ui.primary-button>
-                <form method="POST" action="{{ route('login.destroy') }}">
+
+                <form id="logout-form" method="POST"
+                    action="{{ route('login.destroy') }}">
                     @csrf
                     @method('delete')
-                    <x-ui.destructive-button
+                    <x-ui.destructive-button id="logout-form-submit-button"
                         type="submit">ログアウト</x-ui.destructive-button>
                 </form>
+                <script>
+                    document.getElementById('logout-form').addEventListener('submit', () => {
+                        const button = document.getElementById(
+                            'logout-form-submit-button');
+                        button.disabled = true;
+                        button.dataset.loading = "true";
+                    });
+                </script>
             </div>
         </nav>
     </header>

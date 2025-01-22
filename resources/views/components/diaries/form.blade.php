@@ -41,3 +41,13 @@
         </form>
     </x-ui.card>
 </div>
+
+<script>
+    document.getElementById("diary-form").addEventListener('submit',
+        () => {
+            const button = document.getElementById(
+                "diary-form-submit-button");
+            button.disabled = true;
+            button.dataset.loading = "true";
+        });
+</script>
