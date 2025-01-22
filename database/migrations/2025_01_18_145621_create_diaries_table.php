@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
+            $table->date('diary_date');
             $table->string('content');
             $table->string('file_name')->nullable();
             $table->timestamps();

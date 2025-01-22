@@ -2,7 +2,8 @@
 
 <div class="flex items-center justify-center p-6 md:p-10">
     <x-ui.card title="{{ $title }}" class="w-full max-w-sm">
-        <form id="diary-form" action="{{ $action }}" method="POST">
+        <form id="diary-form" action="{{ $action }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @if ($method !== 'post')
                 @method($method)
@@ -10,13 +11,14 @@
 
             <div class="flex flex-col gap-6">
                 <div class="grid gap-2">
-                    <x-form.input-label for="date">日付</x-form.input-label>
-                    <x-form.input id="date" name="date" type="date"
-                        :value="old(
-                            'date',
-                            ($diary?->created_at ?? today())->format('Y-m-d'),
-                        )" :max="today()->format('Y-m-d')" required />
-                    <x-form.input-error :message="$errors->get('date')" />
+                    <x-form.input-label for="diary_date">日付</x-form.input-label>
+                    <x-form.input id="diary_date" name="diary_date"
+                        type="date" :value="old(
+                            'diary_date',
+                            ($diary?->diary_date ?? today())->format('Y-m-d'),
+                        )" :max="today()->format('Y-m-d')"
+                        required />
+                    <x-form.input-error :message="$errors->get('diary_date')" />
                 </div>
 
                 <div class="grid gap-2">

@@ -19,12 +19,10 @@ class DiaryFactory extends Factory
      */
     public function definition(): array
     {
-        $date = fake()->unique()->date();
         return [
+            'diary_date' => fake()->unique()->date(),
             'content' => fake()->sentence(),
             'file_name' => $this->downloadPlaceholderFile(),
-            'created_at' => $date,
-            'updated_at' => $date,
         ];
     }
 
@@ -40,11 +38,9 @@ class DiaryFactory extends Factory
             return null;
         }
 
-        $extension = Str::of($uri)->explode('.')->last();
-
         $body = $response->body();
 
-        $file_name = Str::random(40).'.'.$extension;
+        $file_name = Str::random(40);
 
         if (! Storage::put($file_name, $body)) {
             return null;

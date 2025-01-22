@@ -8,6 +8,8 @@ use App\Models\Diary;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DiaryController extends Controller
@@ -30,7 +32,7 @@ class DiaryController extends Controller
                 ->paginate(5)
                 ->through(fn (Diary $diary) => [
                     'id' => $diary->id,
-                    'title' => $diary->created_at?->format('Y年m月d日'),
+                    'title' => $diary->diary_date->format('Y年m月d日'),
                     'image_path' => $diary->file_name
                         ? Storage::temporaryUrl(
                             $diary->file_name,
@@ -56,11 +58,22 @@ class DiaryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDiaryRequest $request)
+    public function store(StoreDiaryRequest $request): RedirectResponse
     {
-        if (request()->user()?->cannot('create', Diary::class)) {
-            abort(403);
-        }
+        DB::transaction(function () use ($request) {
+            // @phpstan-ignore method.nonObject
+            $file_name = $request->file('image')?->store();
+
+            request()->user()?->diaries()->create([
+                'diary_date' => $request->date('diary_date'),
+                'content' => $request->string('content'),
+                'file_name' => $file_name,
+            ]);
+        });
+
+        return to_route('diaries.index')->with([
+            'status' => 'diary-created',
+        ]);
     }
 
     /**

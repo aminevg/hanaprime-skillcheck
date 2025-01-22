@@ -195,4 +195,10 @@ return [
 
     'attributes' => [],
 
+    'values' => [
+        'diary_date' => [
+            'today' => '本日',
+        ],
+    ],
+
 ];
