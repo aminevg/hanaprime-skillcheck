@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Pest\Laravel\actingAs;
+use function PHPUnit\Framework\assertNotNull;
 
 uses(RefreshDatabase::class);
 
