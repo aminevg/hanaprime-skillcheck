@@ -12,7 +12,7 @@ class DiaryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class DiaryPolicy
      */
     public function view(User $user, Diary $diary): bool
     {
-        return false;
+        return $user->is($diary->user);
     }
 
     /**
@@ -28,7 +28,7 @@ class DiaryPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -36,7 +36,7 @@ class DiaryPolicy
      */
     public function update(User $user, Diary $diary): bool
     {
-        return false;
+        return $this->view($user, $diary);
     }
 
     /**
@@ -44,22 +44,6 @@ class DiaryPolicy
      */
     public function delete(User $user, Diary $diary): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Diary $diary): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Diary $diary): bool
-    {
-        return false;
+        return $this->view($user, $diary);
     }
 }

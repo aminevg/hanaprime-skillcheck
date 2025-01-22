@@ -20,6 +20,10 @@ class DiaryController extends Controller
         /** @var User */
         $user = request()->user() ?? throw new Exception;
 
+        if ($user->cannot('viewAny', Diary::class)) {
+            abort(403);
+        }
+
         return view('diaries.index', [
             'diaries' => $user->diaries()
                 ->orderByDesc('created_at')
@@ -41,7 +45,9 @@ class DiaryController extends Controller
      */
     public function create()
     {
-        //
+        if (request()->user()?->cannot('create', Diary::class)) {
+            abort(403);
+        }
     }
 
     /**
@@ -49,7 +55,9 @@ class DiaryController extends Controller
      */
     public function store(StoreDiaryRequest $request)
     {
-        //
+        if (request()->user()?->cannot('create', Diary::class)) {
+            abort(403);
+        }
     }
 
     /**
@@ -57,7 +65,9 @@ class DiaryController extends Controller
      */
     public function edit(Diary $diary)
     {
-        //
+        if (request()->user()?->cannot('update', Diary::class)) {
+            abort(403);
+        }
     }
 
     /**
@@ -65,7 +75,9 @@ class DiaryController extends Controller
      */
     public function update(UpdateDiaryRequest $request, Diary $diary)
     {
-        //
+        if (request()->user()?->cannot('update', Diary::class)) {
+            abort(403);
+        }
     }
 
     /**
@@ -73,6 +85,8 @@ class DiaryController extends Controller
      */
     public function destroy(Diary $diary)
     {
-        //
+        if (request()->user()?->cannot('delete', Diary::class)) {
+            abort(403);
+        }
     }
 }
