@@ -93,11 +93,29 @@ class DiaryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDiaryRequest $request, Diary $diary)
+    public function update(UpdateDiaryRequest $request, Diary $diary): RedirectResponse
     {
-        if (request()->user()?->cannot('update', $diary)) {
-            abort(403);
-        }
+        DB::transaction(function () use ($request, $diary) {
+            $old_file_name = $diary->file_name;
+
+            // @phpstan-ignore method.nonObject
+            $new_file_name = $request->file('image')?->store();
+
+            $diary->update([
+                'diary_date' => $request->date('diary_date'),
+                'content' => $request->string('content'),
+                'file_name' => $new_file_name ?? $old_file_name,
+            ]);
+
+            // Remove old image ONLY if new image is uploaded
+            if ($new_file_name && $old_file_name && ! Storage::delete($old_file_name)) {
+                abort(500);
+            }
+        });
+
+        return to_route('diaries.index')->with([
+            'status' => 'diary-updated',
+        ]);
     }
 
     /**

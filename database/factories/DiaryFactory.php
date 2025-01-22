@@ -34,10 +34,6 @@ class DiaryFactory extends Factory
             return null;
         }
 
-        if (! ($uri = $response->effectiveUri()?->getPath())) {
-            return null;
-        }
-
         $body = $response->body();
 
         $file_name = Str::random(40);
