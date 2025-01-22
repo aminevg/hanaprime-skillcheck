@@ -1,9 +1,6 @@
-@props(['title' => ''])
+@props(['title' => '', 'status' => null])
 
 <x-layouts.root :title="$title">
-    <script type="module">
-        hello();
-    </script>
     <header class="sticky top-0 z-50 w-full">
         <nav
             class="flex h-14 w-full items-center border-b bg-white px-6 py-3 backdrop-blur supports-[backdrop-filter]:bg-white/60">

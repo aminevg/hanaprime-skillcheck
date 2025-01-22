@@ -28,7 +28,7 @@ class DiaryController extends Controller
 
         return view('diaries.index', [
             'diaries' => $user->diaries()
-                ->orderByDesc('created_at')
+                ->orderByDesc('diary_date')
                 ->paginate(5)
                 ->through(fn (Diary $diary) => [
                     'id' => $diary->id,
