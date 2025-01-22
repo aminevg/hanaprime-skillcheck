@@ -31,3 +31,15 @@ test('shows diary when available', function () {
     actingAs($user)->get(route('diaries.index'))
         ->assertSee($diary->content);
 });
+
+test('shows diary content on edit page', function () {
+    $user = User::factory()->createOne();
+    $diary = Diary::factory()
+        ->for($user)
+        ->createOne();
+    assertNotNull($diary->created_at);
+
+    actingAs($user)->get(route('diaries.edit', ['diary' => $diary]))
+        ->assertSee($diary->created_at->format('Y-m-d'))
+        ->assertSee($diary->content);
+});
