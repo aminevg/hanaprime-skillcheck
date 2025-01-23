@@ -1,4 +1,4 @@
-<x-layouts.authenticated title="一覧ページ">
+<x-layouts.authenticated title="一覧ページ" :status="session()->get('status')">
     <div
         class="grid grid-cols-1 justify-items-center gap-5 p-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
 

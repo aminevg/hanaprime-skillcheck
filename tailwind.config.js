@@ -14,6 +14,15 @@ export default {
             fontFamily: {
                 sans: ['Noto Sans JP', ...defaultTheme.fontFamily.sans],
             },
+            keyframes: {
+                'show-toast-keyframes': {
+                    from: {opacity: 0, transform: 'translateY(-100%)'},
+                    to: {opacity: 1},
+                }
+            },
+            animation: {
+                'show-toast': 'show-toast-keyframes 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+            }
         },
     },
     plugins: [],
