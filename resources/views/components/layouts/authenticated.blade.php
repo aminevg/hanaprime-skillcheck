@@ -36,7 +36,7 @@
     <main class="relative">
         {{ $slot }}
 
-        @if (Route::currentRouteName() !== 'diaries.create')
+        @if (Route::currentRouteName() === 'diaries.index')
             <div class="fixed bottom-5 right-5 z-10 lg:hidden">
                 <a href="{{ route('diaries.create') }}"
                     class="inline-flex h-16 w-16 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-zinc-900 text-sm font-medium text-zinc-50 ring-offset-white transition-colors hover:bg-zinc-900/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 [&_svg]:pointer-events-none [&_svg]:size-8 [&_svg]:shrink-0">
