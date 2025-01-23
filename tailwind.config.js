@@ -13,6 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Noto Sans JP', ...defaultTheme.fontFamily.sans],
+                hachimarupop: ['Hachi Maru Pop', ...defaultTheme.fontFamily.serif],
             },
             keyframes: {
                 'show-toast-keyframes': {

@@ -7,13 +7,7 @@
             <div class="flex-grow">
                 <a href="{{ route('diaries.index') }}"
                     class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32"
-                        height="32" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M7 14v-2h10v2zm0 4v-2h7v2zm-2 4q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5z" />
-                    </svg>
-                    <span
-                        class="hidden text-2xl font-semibold lg:inline-block">1行日記</span>
+                    <x-ui.application-logo />
                 </a>
             </div>
             <div class="flex justify-end gap-3">
