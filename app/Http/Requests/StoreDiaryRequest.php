@@ -66,7 +66,7 @@ class StoreDiaryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'image.max' => "画像には、1 MB以下のファイルを指定してください。",
+            'image.max' => '画像には、1 MB以下のファイルを指定してください。',
         ];
     }
 }
