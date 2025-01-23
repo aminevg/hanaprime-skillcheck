@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseEmpty;
+use function Pest\Laravel\assertModelMissing;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotNull;
 
@@ -239,4 +240,18 @@ it('throws error if updated diary has same date as existing other diary', functi
             'content' => 'This is a great day to start a new challenge',
         ])
         ->assertInvalid(['diary_date']);
+});
+
+it('removes diary', function () {
+    $user = User::factory()->createOne();
+    $diary = Diary::factory()
+        ->for($user)
+        ->createOne();
+
+    actingAs($user)
+        ->delete(route('diaries.destroy', ['diary' => $diary]))
+        ->assertRedirectToRoute('diaries.index')
+        ->assertSessionHas('status', 'diary-deleted');
+
+    assertModelMissing($diary);
 });

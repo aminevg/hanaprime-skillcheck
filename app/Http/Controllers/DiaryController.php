@@ -121,10 +121,16 @@ class DiaryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Diary $diary)
+    public function destroy(Diary $diary): RedirectResponse
     {
         if (request()->user()?->cannot('delete', $diary)) {
             abort(403);
         }
+
+        $diary->delete();
+
+        return to_route('diaries.index')->with([
+            'status' => 'diary-deleted',
+        ]);
     }
 }

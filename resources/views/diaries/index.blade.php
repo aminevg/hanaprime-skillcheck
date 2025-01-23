@@ -6,7 +6,8 @@
             <x-ui.card :title="$diary['title']">
                 <div class="flex h-full flex-col">
                     @if ($diary['image_path'])
-                        <img src="{{ $diary['image_path'] }}" class="h-60 w-80 rounded-lg" />
+                        <img src="{{ $diary['image_path'] }}"
+                            class="h-60 w-80 rounded-lg" />
                     @else
                         <div
                             class="flex h-60 w-80 items-center justify-center rounded-lg border text-stone-950 opacity-50">
@@ -22,7 +23,13 @@
                             :href="route('diaries.edit', [
                                 'diary' => $diary['id'],
                             ])">編集</x-ui.primary-button>
-                        <x-ui.destructive-button>削除</x-ui.destructive-button>
+                        <form
+                            action="{{ route('diaries.destroy', ['diary' => $diary['id']]) }}"
+                            method="POST" onsubmit="confirmDelete()">
+                            @csrf
+                            @method('delete')
+                            <x-ui.destructive-button>削除</x-ui.destructive-button>
+                        </form>
                     </div>
                 </x-slot:footer>
             </x-ui.card>
@@ -32,4 +39,12 @@
     </div>
 
     <x-ui.pagination :paginator="$diaries" class="py-8" />
+
+    <script>
+        function confirmDelete() {
+            if (!confirm('日記を削除します。よろしいでしょうか？')) {
+                event.preventDefault();
+            }
+        }
+    </script>
 </x-layouts.authenticated>

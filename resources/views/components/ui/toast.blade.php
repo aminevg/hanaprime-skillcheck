@@ -4,6 +4,7 @@
     $statusMessage = match ($status) {
         'diary-created' => '日記を追加しました。',
         'diary-updated' => '日記を編集しました。',
+        'diary-deleted' => '日記を削除しました。',
         default => null,
     };
 @endphp
